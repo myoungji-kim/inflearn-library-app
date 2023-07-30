@@ -1,0 +1,9 @@
+# build
+/build
+
+# idea
+/.idea
+
+# gradle
+/.gradle
+/gradle
