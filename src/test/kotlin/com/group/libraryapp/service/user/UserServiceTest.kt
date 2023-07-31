@@ -3,6 +3,7 @@ package com.group.libraryapp.service.user
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,6 +14,7 @@ class UserServiceTest @Autowired constructor (
     private val userService: UserService,
 ) {
     @Test
+    @DisplayName("유저 정보 저장이 정상적으로 진행")
     fun saveUserTest() {
         // given
         val request = UserCreateRequest("김명지", null)
