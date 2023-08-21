@@ -77,4 +77,21 @@ class UserServiceTest @Autowired constructor (
         val result = userRepository.findAll()[0]
         assertThat(result.name).isEqualTo("B")
     }
+
+    /**
+     * DB 내 저장된 사용자 정보를 삭제한 후,
+     * DB에 데이터가 비어있는지 확인
+     */
+    @Test
+    @DisplayName("유저 삭제가 정상적으로 진행")
+    fun deleteUserTest() {
+        // given
+        userRepository.save(User("A", null))
+
+        // when
+        userService.deleteUser("A")
+
+        // then
+        assertThat(userRepository.findAll()).isEmpty()
+    }
 }
