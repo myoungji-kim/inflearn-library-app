@@ -3,6 +3,7 @@ package com.group.libraryapp.service.user
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
+import com.group.libraryapp.dto.user.request.UserUpdateRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.AfterEach
@@ -57,5 +58,23 @@ class UserServiceTest @Autowired constructor (
         assertThat(results).hasSize(2) // [UserResponse(), UserResponse()]
         assertThat(results).extracting("name").containsExactlyInAnyOrder("A", "B") // ["A", "B"]
         assertThat(results).extracting("age").containsExactlyInAnyOrder(20, null)
+    }
+
+    /**
+     * 저장한 A 유저의 정보를 불러와 ID를 변경해준 뒤, 잘 변경되었는지 확인
+     */
+    @Test
+    @DisplayName("유저 업데이트가 정상적으로 진행")
+    fun updateUserNameTest() {
+        // given
+        val savedUser = userRepository.save(User("A", null))
+        val request = UserUpdateRequest(savedUser.id, "B")
+
+        // when
+        userService.updateUserName(request)
+
+        // then
+        val result = userRepository.findAll()[0]
+        assertThat(result.name).isEqualTo("B")
     }
 }
