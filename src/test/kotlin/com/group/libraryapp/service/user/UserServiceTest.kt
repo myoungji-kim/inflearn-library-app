@@ -95,3 +95,5 @@ class UserServiceTest @Autowired constructor (
         assertThat(userRepository.findAll()).isEmpty()
     }
 }
+
+
